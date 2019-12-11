@@ -9,3 +9,7 @@
 - Error checking, when the node is null, we can't access its element
 
 - Good way to split the linked list into left tree and right tree by setting the left tree's last node's next to null
+
+- Convert it into an array first will faster the process of finding the middle element by 
+
+  using the index
