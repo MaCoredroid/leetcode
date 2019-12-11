@@ -13,3 +13,5 @@
 - Convert it into an array first will faster the process of finding the middle element by 
 
   using the index
+  
+- Inorder is just quite suitable for sorted array, which runs fast and save space
