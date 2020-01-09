@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> ans;
+        unordered_map<int,int> key;
+        for(int i=0;i<nums.size();i++)
+        {
+            auto find= key.find(target-nums[i]);
+            if(find!=key.end())
+            {
+                ans.push_back(i);
+                ans.push_back(find->second);
+                return ans;
+            }
+            else
+            {
+                key[nums[i]]=i;
+            }
+        }
+        return ans;
+    }
+};
