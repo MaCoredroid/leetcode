@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int shortestDistance(vector<string>& words, string word1, string word2) {
+        int p=-1;
+        int q=-1;
+        int ans = words.size();
+        for(int i=0;i<words.size();i++)
+        {
+            if(words[i]==word1)
+            {
+                p=i;
+                if(p !=-1&&q!=-1)
+                {
+                    ans = min(ans,abs(p-q));
+                }
+            }
+            else if(words[i]==word2)
+            {
+                q=i;
+                if(p !=-1&&q!=-1)
+                {
+                    ans = min(ans,abs(p-q));
+                }
+            }
+        }
+        
+        return ans;
+    }
+};
