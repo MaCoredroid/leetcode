@@ -1,0 +1,55 @@
+class MaxStack {
+public:
+    list<int> data;
+    map<int, vector<list <int> :: iterator >> key;
+    /** initialize your data structure here. */
+    MaxStack() {
+        
+    }
+    
+    void push(int x) {
+        
+        data.push_front(x);
+        key[x].push_back(data.begin());
+    }
+    
+    int pop() {
+        int temp=data.front();
+        data.pop_front();
+        key[temp].pop_back();
+        if(key[temp].empty())
+        {
+            key.erase(temp);
+        }
+        return temp;
+    }
+    
+    int top() {
+        return data.front();
+    }
+    
+    int peekMax() {
+        return key.rbegin()->first;
+    }
+    
+    int popMax() {
+        int ans = key.rbegin()->first;
+        data.erase(key.rbegin()->second.back());
+        key.rbegin()->second.pop_back();
+        if(key[ans].empty())
+        {
+            key.erase(ans);
+        }
+        return ans;
+    }
+};
+
+/**
+ * Your MaxStack object will be instantiated and called as such:
+ * MaxStack* obj = new MaxStack();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->peekMax();
+ * int param_5 = obj->popMax();
+ */
