@@ -1,0 +1,31 @@
+class TwoSum {
+public:
+    map<int,int> key;
+    /** Initialize your data structure here. */
+    TwoSum() {
+        
+    }
+    
+    /** Add the number to an internal data structure.. */
+    void add(int number) {
+        if(key.find(number)==key.end())
+        {
+        key[number]=1;
+        }
+        else{
+        key[number]=2;
+        }
+    }
+    
+    /** Find if there exists any pair of numbers which sum is equal to the value. */
+    bool find(int value) {
+        for (auto i = key.begin(); i != key.end(); i++) 
+        { 
+            if(key.find(value-i->first)!=key.end()&&((key.find(value-i->first)->first!=i->first)||(key.find(value-i->first)->second==2)))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+};
