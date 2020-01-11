@@ -1,0 +1,55 @@
+class Solution {
+public:
+    string temp;
+    vector<vector<vector<long>>> key;
+    long helper(int a,int i,int j)
+    {
+        if(key[a][i][j]!=-1)
+        {
+            return key[a][i][j];
+        }
+        if(i>= temp.length()||j<i||j<0)
+        {
+            key[a][i][j]=0;
+            return 0;
+        }
+        if(i==j)
+        {
+            if(temp[i]==a+'a')
+            {
+                key[a][i][j]=1;
+                return 1;
+            }
+            else
+            {
+                key[a][i][j]=0;
+                return 0;
+            }
+        }
+        if(temp[i]!=a+'a')
+        {
+            key[a][i][j]=helper(a,i+1,j);
+            return key[a][i][j];
+        }
+        else if(temp[j]!=a+'a')
+        {
+            key[a][i][j]=helper(a,i,j-1);
+            return key[a][i][j];
+        }
+        else if(temp[i]==a+'a'&&temp[j]==a+'a')
+        {
+            key[a][i][j]= (2+helper(0,i+1,j-1)+helper(1,i+1,j-1)+helper(2,i+1,j-1)+helper(3,i+1,j-1))%(1000000007);
+            return key[a][i][j];
+        }
+        return 0;
+    }
+    
+    int countPalindromicSubsequences(string S) {
+        temp = S;
+        vector<vector<vector<long>>> key1(4, vector<vector<long>> (S.size(), vector<long>(S.size(),-1)));
+        key=key1;
+        int size = S.length();
+        return (helper(0,0,size-1)+helper(1,0,size-1)+helper(2,0,size-1)+helper(3,0,size-1))%(1000000007);
+        
+    }
+};
