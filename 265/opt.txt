@@ -1,0 +1,52 @@
+class Solution {
+public:
+    int minCostII(vector<vector<int>>& costs) {
+        if(costs.size()==0)
+        {
+            return 0;
+        }
+        int mincost =0;
+        int mincost1 =0;
+        int color = -1;
+        for(int i=0;i<costs.size();i++)
+        {
+            int tempcost = INT_MAX;
+            int tempcost1 = INT_MAX;
+            int tempcolor = -1;
+            for(int j=0;j<costs[i].size();j++)
+            {
+                if(j==color)
+                {
+                    if(costs[i][j]+mincost1<tempcost)
+                    {
+                        tempcost1=tempcost;
+                        tempcost=costs[i][j]+mincost1;
+                        tempcolor = j;
+                    }
+                    else if(costs[i][j]+mincost1<tempcost1)
+                    {
+                        tempcost1=costs[i][j]+mincost1;
+                    }
+                }
+                else
+                {
+                    if(costs[i][j]+mincost<tempcost)
+                    {
+                        tempcost1=tempcost;
+                        tempcost=costs[i][j]+mincost;
+                        tempcolor = j;
+                    }
+                    else if(costs[i][j]+mincost<tempcost1)
+                    {
+                        tempcost1=costs[i][j]+mincost;
+                    }
+                }
+            }
+            mincost=tempcost;
+            mincost1=tempcost1;
+            color=tempcolor;
+
+        }
+        return mincost;
+    }
+};
