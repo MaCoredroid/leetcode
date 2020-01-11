@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int minCostII(vector<vector<int>>& costs) {
+        if(costs.size()==0)
+        {
+            return 0;
+        }
+        for(int i=1;i<costs.size();i++)
+        {
+            for(int j=0;j<costs[i].size();j++)
+            {
+                vector<int> temp = costs[i-1];
+                temp.erase(temp.begin()+j);
+                costs[i][j]+=*min_element(temp.begin(),temp.end());
+            }
+        }
+        return *min_element(costs[costs.size()-1].begin(),costs[costs.size()-1].end());
+    }
+};
