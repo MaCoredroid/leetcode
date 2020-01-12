@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<vector<int>> multiply(vector<vector<int>>& A, vector<vector<int>>& B) {
+        int i1= A.size();
+        int j1= A[0].size();
+        int i2= B.size();
+        int j2= B[0].size();
+        vector<vector<int>> ans (i1,vector<int>(j2,0));
+        for(int i=0;i<i1;i++)
+        {
+            for(int j=0;j<j2;j++)
+            {
+                for(int p=0;p<j1;p++)
+                {
+                    if(A[i][p]!=0&&B[p][j]!=0)
+                    {
+                        ans[i][j] += A[i][p]*B[p][j];
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+};
