@@ -1,0 +1,77 @@
+class AllOne {
+public:
+    /** Initialize your data structure here. */
+    AllOne() {
+        
+    }
+    map <int,unordered_set<string>> key1;
+    unordered_map <string ,int> key2;
+    /** Inserts a new key <Key> with value 1. Or increments an existing key by 1. */
+    void inc(string key) {
+        if(key2.find(key)!=key2.end())
+        {
+            key1[key2[key]].erase(key);
+            if( key1[key2[key]].empty())
+            {
+                key1.erase(key2[key]);
+            }
+            key2[key]++;
+            key1[key2[key]].insert(key);
+            
+        }
+        else
+        {
+            key1[1].insert(key);
+            key2[key]=1;
+        }
+    }
+    
+    /** Decrements an existing key by 1. If Key's value is 1, remove it from the data structure. */
+    void dec(string key) {
+        if(key2.find(key)!=key2.end())
+        {
+            key2[key]--;
+            if(key2[key]==0)
+            {
+                key2.erase(key);
+                key1[1].erase(key);
+                if(key1[1].empty())
+                {
+                    key1.erase(1);
+                }
+            }
+            else
+            {
+                key1[key2[key]+1].erase(key);
+                if(key1[key2[key]+1].empty())
+                {
+                    key1.erase(key2[key]+1);
+                }
+                key1[key2[key]].insert(key);
+
+            }
+        }
+        else
+        {
+            return;
+        }
+    }
+    
+    /** Returns one of the keys with maximal value. */
+    string getMaxKey() {
+        if(!key1.empty())
+        {
+            return *key1.rbegin()->second.begin();
+        }
+        return "";
+    }
+    
+    /** Returns one of the keys with Minimal value. */
+    string getMinKey() {
+        if(!key1.empty())
+        {
+            return *key1.begin()->second.begin();
+        }
+        return "";
+    }
+};
