@@ -1,0 +1,63 @@
+class Solution {
+public:
+    int shortestWordDistance(vector<string>& words, string word1, string word2) {
+        map<string,vector<int>> key;
+        for(int i=0;i<words.size();i++)
+        {
+            if(words[i]==word1||words[i]==word2)
+            {
+                
+                key[words[i]].push_back(i);
+                
+            }
+        }
+        if(word1==word2)
+        {
+            vector<int> temp = key[word1];
+            int ans = words.size();
+            if(ans==1)
+            {
+                return 0;
+            }
+            for(int i=1;i<temp.size();i++)
+            {
+                
+                ans = min(ans,temp[i]-temp[i-1]);
+                
+            }
+            return ans;
+        }
+        else
+        {
+            auto temp1 = key[word1];
+            auto temp2 = key[word2];
+            int i=0;
+            int j=0;
+            int ans= words.size();
+            while(i<temp1.size()&&j<temp2.size())
+            {
+                if(temp1[i]>temp2[j])
+                {
+                    
+                    
+                    ans = min(ans,abs(temp1[i]-temp2[j]));
+                    
+                    j++;
+                }
+                else if(temp1[i]<temp2[j])
+                {
+                    
+                    ans = min(ans,abs(temp1[i]-temp2[j]));
+                    
+                    i++;
+                }
+                else 
+                {
+                    return 0;
+                }
+                
+            }
+            return ans;
+        }
+    }
+};
