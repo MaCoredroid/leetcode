@@ -1,0 +1,57 @@
+class Solution {
+public:
+    
+    int gcd(int a,int b)
+    {
+        while(b!=0)
+        {
+            int temp = a%b;
+            a = b;
+            b = temp;
+        }
+        return a;
+    }
+    int maxPoints(vector<vector<int>>& points) {
+        int pointssize = points.size();
+        if(pointssize<3)
+        {
+            return pointssize;
+        }
+        int res = 0;
+        for(int i=0;i<pointssize;i++)
+        {
+            if(res >= pointssize-i)
+            {
+                return res;
+            }
+            int duplicate = 0;
+            int ans = 0;
+            map<string,int> key;
+            for(int j = i+1;j<pointssize;j++)
+            {
+                int y = points[j][1]-points[i][1];
+                int x = points[j][0]-points[i][0];
+                if(x==0&&y==0)
+                {
+                    duplicate++;
+                }
+                else
+                {
+                    int temp =gcd(y,x);
+                    y = y/temp;
+                    x = x/temp;
+                    string thekey = to_string(y) + '@' + to_string(x);                   
+                    key[thekey]++;
+                }
+            }
+            map<string, int>::iterator it;
+            for(it = key.begin();it !=key.end();it++)
+            {
+                ans = max(ans,it->second);
+            }
+            res = max(res, ans+duplicate+1);
+
+        }
+        return res;
+    }
+};
