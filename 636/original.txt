@@ -1,0 +1,62 @@
+class Solution {
+public:
+
+    vector<string> split(string t, char sp)
+    {
+        vector<string> ans;
+        string temp="";
+        for(int i=0;i<t.length();i++)
+        {
+            if(t[i]==sp)
+            {
+                ans.push_back(temp);
+                temp = "";
+            }
+            else
+            {
+                temp+=t[i];
+            }
+        }
+        ans.push_back(temp);
+        return ans;
+
+    }
+
+
+
+    vector<int> exclusiveTime(int n, vector<string>& logs) {
+        vector<int> ans(n,0);
+        stack<int> key;
+        int prev= 0;
+        for(int i=0;i<logs.size();i++) 
+        {
+            vector<string> item = split(logs[i],':');
+            int id = stoi(item[0]);
+            int time = stoi(item[2]);
+            if(item[1]=="start")
+            {
+                if(!key.empty())
+                {
+                    ans[key.top()]+=time-prev;
+                    key.push(id);
+                    prev = time;
+                }
+                else
+                {
+                    key.push(id);
+                    prev = time;
+                }
+            }
+            else if(item[1]=="end")
+            {
+                if(!key.empty())
+                {
+                    ans[key.top()]+=time+1-prev;
+                    key.pop();
+                    prev = time+1;
+                }
+            }
+        }
+        return ans;
+    }
+};
