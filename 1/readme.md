@@ -3,3 +3,4 @@
 3. Take advantage of hash map to lower the "looking up complexity"
 4. Using brutal force to solve this problem, remember that each the second layer of loop can start from the element rather than the beginning.
 5. In java, throw exception instead of return null value
+6. You can use an array as the value to record multiple positions of one number
