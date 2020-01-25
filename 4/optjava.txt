@@ -1,0 +1,72 @@
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int len1 = nums1.length;
+        int len2 = nums2.length;
+        if(len1>len2)
+        {
+            int [] tempArray = nums1;
+            nums1 = nums2;
+            nums2 = tempArray;
+            int temp = len1;
+            len1 = len2;
+            len2 = temp;
+        }
+        int halflen = (len1+len2+1)/2;
+        int imin = 0;
+        int imax = len1;
+        int i = 0;
+        int j = 0;
+        while(imin<=imax)
+        {
+            i = (imin+imax)/2;
+            j = halflen - i;
+            if(i<len1&&nums1[i]<nums2[j-1])
+            {
+                imin=i+1;
+            }
+            else if(i>0&&nums1[i-1]>nums2[j])
+            {
+                imax = i-1;
+            }
+            else
+            {
+                int maxofleft=0;
+                if(i==0)
+                {
+                    maxofleft = nums2[j-1];
+                }
+                else if(j==0)
+                {
+                    maxofleft = nums1[i-1];
+                }
+                else
+                {
+                    maxofleft = Math.max(nums1[i-1],nums2[j-1]);
+                }
+                if((len1+len2)%2==1)
+                {
+                    return maxofleft;
+                }
+                else
+                {
+                    int minofright = 0;
+                    if(i==len1)
+                    {
+                        minofright = nums2[j];
+                    }
+                    else if(j==len2)
+                    {
+                        minofright = nums1[i];
+                    }
+                    else
+                    {
+                        minofright = Math.min(nums1[i],nums2[j]);
+                    }
+                    return (maxofleft+minofright)/2.0;
+                }
+            }
+            
+        }
+        throw new IllegalArgumentException("No answer");
+    }
+}
