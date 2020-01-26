@@ -1,0 +1,46 @@
+class Solution {
+    public String convert(String s, int numRows) {
+        int tempRows=numRows+numRows-2;
+        if(numRows==1)
+        {
+            return s;
+        }
+        int len = s.length();
+        if(len==0)
+        {
+            return "";
+        }
+        int carry = len/tempRows;
+        int left = len%tempRows;
+        StringBuilder ret = new StringBuilder();
+        for(int i=0;i<numRows;i++)
+        {
+            for(int j=0;j<=carry;j++)
+            {
+                if(i==0||i==numRows-1)
+                {
+                    int index=j*tempRows+i;
+                    if(index<s.length())
+                    {
+                        ret.append(s.charAt(index));                
+                    }
+                }
+                else
+                {
+                    int index=j*tempRows+i;
+                    if(index<s.length())
+                    {
+                        ret.append(s.charAt(index));                
+                    }
+                    index=j*tempRows+tempRows-i;
+                    if(index<s.length())
+                    {
+                        ret.append(s.charAt(index));                
+                    }
+                }
+            }
+        }
+        return ret.toString();
+
+    }
+}
