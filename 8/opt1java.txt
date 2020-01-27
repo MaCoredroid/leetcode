@@ -1,0 +1,45 @@
+class Solution {
+    public int myAtoi(String str) {
+        int ans = 0;
+        int zf = 1;
+        if(str.length()==0)
+        {
+            return 0;
+        }
+        int i=0;
+        while(i<str.length()&&str.charAt(i)==' ')
+        {
+            i++;
+        }
+        if(i<str.length()&&str.charAt(i)=='-')
+        {
+            zf=-1;
+            i++;
+        }
+        else if(i<str.length()&&str.charAt(i)=='+')
+        {
+            i++;
+        }
+        for(;i<str.length();i++)
+        {                   
+            if(str.charAt(i)>='0'&&str.charAt(i)<='9')
+            {
+                int pop = Character.getNumericValue(str.charAt(i))*zf;
+                if(ans>Integer.MAX_VALUE/10||(ans==Integer.MAX_VALUE/10&&pop>7)) 
+                {
+                    return Integer.MAX_VALUE;
+                }
+                if(ans<Integer.MIN_VALUE/10||(ans==Integer.MIN_VALUE/10&&pop<-8))
+                {
+                    return Integer.MIN_VALUE;
+                }
+                ans=ans*10+pop;
+            }
+            else
+            {
+                return ans; 
+            }           
+        }
+        return ans;
+    }
+}
