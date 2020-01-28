@@ -21,11 +21,11 @@ class Solution {
         for(int i=0;i<strs.length;i++)
         {
             int j=min.length()-1;
-            while(min.charAt(j) != strs[i].charAt(j))
+            while(min.charAt(j)!=strs[i].charAt(j))
             {
                 j--;
             }
-            min = min.substring(0, j+1);
+            min= min.substring(0,j+1);
         }
         return min;
     }
