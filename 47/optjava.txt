@@ -1,0 +1,41 @@
+class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> res=new ArrayList<List<Integer>>();
+        List<Integer> num_list= new ArrayList<>();
+        Arrays.sort(nums);
+        for(int num:nums)
+        {
+            num_list.add(num);
+        }
+        backTrack(res,num_list,0);
+        return res;
+    }
+    public void backTrack(List<List<Integer>> res, List<Integer> ans, int start)
+    {
+        if(start==ans.size())
+        {
+            res.add(new ArrayList<Integer>(ans));
+            return;
+        }
+        for(int j=start;j<ans.size();j++)
+        { 
+            if(canSwap(ans,start,j))
+            {          
+                Collections.swap(ans,start,j);
+                backTrack(res,ans,start+1);
+                Collections.swap(ans,j,start);                
+            }
+        }
+    }
+    public boolean canSwap(List<Integer> ans,int start, int j)
+    {
+        for(int i=start;i<j;i++)
+        {
+            if(ans.get(i)==ans.get(j))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+}
