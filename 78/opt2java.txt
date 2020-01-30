@@ -1,0 +1,22 @@
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        res.add(new ArrayList<Integer>());
+        inOrder(res,0,new ArrayList<Integer>(),nums);
+        
+        return res;
+    }
+    
+    public void inOrder(List<List<Integer>> res,int i,List<Integer> ans,int[] nums)
+    {
+        if(i>=nums.length)
+        {
+            return;
+        }
+        List<Integer> ret = new ArrayList<Integer>(ans);
+        inOrder(res,i+1,ret,nums);
+        ret.add(nums[i]);
+        res.add(ret);
+        inOrder(res,i+1,ret,nums);;
+    }
+}
