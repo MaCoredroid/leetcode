@@ -1,0 +1,20 @@
+class Solution {
+    public boolean canJump(int[] nums) {
+        int end=0;
+        int maxposition=0;
+        for(int i=0;i<nums.length-1;i++)
+        {
+            maxposition=Math.max(maxposition,nums[i]+i);
+            if(i==end)
+            {
+                end=maxposition;
+            }
+        }
+        if(end>=nums.length-1)
+        {
+            return true;
+        }
+        return false;
+
+    }
+}
