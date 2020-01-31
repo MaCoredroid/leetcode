@@ -1,0 +1,18 @@
+class Solution {
+    public int jump(int[] nums) {        
+        int steps=0;
+        int maxposition=0;
+        int end=0;
+        for(int i=0;i<nums.length-1;i++)
+        {
+            maxposition=Math.max(maxposition,nums[i]+i);
+            if(i==end)
+            {
+                end=maxposition;
+                steps++;
+            }
+        }
+        return steps;
+    }
+   
+}
