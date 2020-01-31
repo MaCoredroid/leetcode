@@ -1,0 +1,35 @@
+class Solution {
+    private class compare implements Comparator<int[] >
+    {
+        @Override
+        public int compare(int[] a, int[] b) 
+        { 
+            return a[0]-b[0];
+        } 
+    }
+    public int[][] merge(int[][] intervals) {
+
+        Arrays.sort(intervals, new compare());
+        LinkedList<int[]> ans=new LinkedList<int[]>();
+        for(int i=0;i<intervals.length;i++)
+        {
+            if(ans.size()==0)
+            {
+                ans.addLast(intervals[i]);
+                continue;
+            }
+            int[] last=ans.getLast();
+            if(last[1]<intervals[i][0])
+            {
+                ans.addLast(intervals[i]);
+            }
+            else
+            {
+                last[1]=Math.max(last[1],intervals[i][1]);
+                ans.set(ans.size()-1,last);
+            }
+        }
+        
+        return ans.toArray(new int[0][]);
+    }
+}
