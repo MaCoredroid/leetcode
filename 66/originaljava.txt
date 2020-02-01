@@ -1,0 +1,32 @@
+class Solution {
+    public int[] plusOne(int[] digits) {
+        int[] ret=new int[digits.length];
+        int count=1;
+        for(int i=digits.length-1;i>=0;i--)
+        {
+            if(count+digits[i]>=10)
+            {
+                count=1;
+                ret[i]=count+digits[i]-10;
+            }
+            else
+            {
+                ret[i]=count+digits[i];
+                count=0;
+            }            
+        }
+        if(count==1)
+        {
+            int[] ret1=new int[digits.length+1];
+            for(int i=digits.length-1;i>=0;i--)
+            {
+                count=0;
+                ret1[i+1]=ret[i];                            
+            }
+            ret1[0]=1;
+            return ret1;
+        }
+        return ret;
+    }
+}
+
