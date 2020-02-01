@@ -1,0 +1,40 @@
+class Solution {
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        int i=0;
+        LinkedList<int[]> output = new LinkedList<int[]>();
+        while(i<intervals.length&&intervals[i][0]<newInterval[0])
+        {
+            output.add(intervals[i]);
+            i++;
+        }
+        if(output.isEmpty()||output.getLast()[1]<newInterval[0])
+        {
+            output.add(newInterval);
+        }
+        else
+        {
+            int[] temp=new int[2];
+            int[] last=output.removeLast();
+            temp[0]=last[0];
+            temp[1]=(newInterval[1]>last[1])?newInterval[1]:last[1];
+            output.add(temp);
+        }
+        while(i<intervals.length)
+        {
+            if(output.getLast()[1]<intervals[i][0])
+            {
+                output.add(intervals[i]);
+            }
+            else
+            {
+                int[] temp=new int[2];
+                int[] last=output.removeLast();
+                temp[0]=last[0];
+                temp[1]=(intervals[i][1]>last[1])?intervals[i][1]:last[1];
+                output.add(temp);
+            }
+            i++;
+        }
+        return output.toArray(new int[output.size()][2]);
+    }
+}
