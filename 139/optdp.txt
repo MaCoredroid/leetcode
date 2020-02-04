@@ -1,0 +1,19 @@
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        Set<String> map=new HashSet(wordDict);
+        boolean[] dp= new boolean[s.length()+1];
+        dp[0]=true;
+        for(int i=1;i<=s.length();i++)
+        {           
+            for(int p=0;p<i;p++)
+            {
+                if(dp[p]&&map.contains(s.substring(p,i)))
+                {                        
+                    dp[i]=true;
+                    break;                       
+                }
+            }            
+        }
+        return dp[s.length()];
+    }
+}
