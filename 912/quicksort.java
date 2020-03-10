@@ -12,7 +12,7 @@ class Solution {
         }
         return output;
     }
-    public void quickSort(int[] nums, int start, int end)
+    public void quickSort(int[] arr, int start, int end)
     {
         if(start>=end)
         {
@@ -20,27 +20,22 @@ class Solution {
         }
         int left=start;
         int right=end;
-        int privo=nums[(left+right)/2];
-        while(left<=right)
+        int value=arr[start];
+        while(start<end)
         {
-            while(left<=right&&nums[left]<privo)
+            while(start<end&&arr[end]>=value)
             {
-                left++;
+                end--;
             }
-            while(left<=right&&nums[right]>privo)
+            arr[start]=arr[end];   
+            while(start<end&&arr[start]<=value)
             {
-                right--;
+                start++;
             }
-            if(left<=right)
-            {
-                int temp=nums[right];
-                nums[right]=nums[left];
-                nums[left]=temp;
-                left++;
-                right--;
-            }
+            arr[end]=arr[start];         
         }
-        quickSort(nums,start,right);
-        quickSort(nums,left,end);
+        arr[start]=value;
+        quickSort(arr,left,start-1);
+        quickSort(arr,start+1,right);
     }
 }
