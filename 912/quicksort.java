@@ -1,16 +1,7 @@
 class Solution {
-    public List<Integer> sortArray(int[] nums) {
-        ArrayList output=new ArrayList<Integer>();
-        if(nums.length==0)
-        {
-            return output;
-        }
+    public int[] sortArray(int[] nums) {
         quickSort(nums,0,nums.length-1);
-        for(int i=0;i<nums.length;i++)
-        {
-            output.add(nums[i]);
-        }
-        return output;
+        return nums;
     }
     public void quickSort(int[] arr, int start, int end)
     {
