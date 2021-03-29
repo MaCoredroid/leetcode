@@ -5,14 +5,15 @@ class Solution {
         }
         StringBuilder sb=new StringBuilder();
         char[] ch= s.toCharArray();
+        int step=(2*numRows-2);
         for(int i=0;i<numRows;i++){
             int n=0;
-            while(n*(2*numRows-2)-i<ch.length){
-                if(n*(2*numRows-2)-i>=0){
-                    sb.append(ch[n*(2*numRows-2)-i]);
+            while(n*step-i<ch.length){
+                if(n*step-i>=0){
+                    sb.append(ch[n*step-i]);
                 }
-                if(i!=0&&i!=numRows-1&&n*(2*numRows-2)+i<ch.length){
-                    sb.append(ch[n*(2*numRows-2)+i]);
+                if(i!=0&&i!=numRows-1&&n*step+i<ch.length){
+                    sb.append(ch[n*step+i]);
                 }
                 n++;
             }
