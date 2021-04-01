@@ -1,5 +1,8 @@
 class Solution {
     public String multiply(String num1, String num2) {
+        if(num1.charAt(0)=='0'||num2.charAt(0)=='0'){
+            return "0";
+        }
         int overflow=0;
         StringBuilder sb=new StringBuilder();
         for(int i=0;i<num1.length()+num2.length()-1;i++){
@@ -18,12 +21,6 @@ class Solution {
         }
         if(overflow!=0){
             sb.insert(0,overflow);
-        }
-        while(sb.length()>0&&sb.charAt(0)=='0'){
-            sb.deleteCharAt(0);
-        }
-        if(sb.length()==0){
-            sb.append(0);
         }
         return sb.toString();
 
