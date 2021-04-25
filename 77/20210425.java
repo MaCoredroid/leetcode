@@ -10,6 +10,9 @@ class Solution {
             ans.add(new ArrayList<>(curr));
             return;
         }
+        if(curr.size()+n-pointer+1<k){
+            return;
+        }
         for(int i=pointer;i<=n;i++){
             curr.add(i);
             backTrack(ans,n,k,curr,i+1);
