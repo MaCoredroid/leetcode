@@ -65,6 +65,7 @@ class LRUCache {
             if(size>capacity){
                 Node toRemove=removeTail();
                 map.remove(toRemove.key);
+                size--;
             }
         }
     }
