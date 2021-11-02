@@ -12,6 +12,5 @@ class Solution {
             pointer2++;
         }
         return ans;
-
     }
 }
